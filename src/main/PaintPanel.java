@@ -11,9 +11,10 @@ public class PaintPanel extends JPanel {
     private Listener theListener;
     private int x, y;
     private OptionsWindow optionsWindow;
+    private Color toolColor;
 
-    public PaintPanel() {
-        optionsWindow = new OptionsWindow();
+    public PaintPanel(OptionsWindow optionsWindow) {
+        this.optionsWindow = optionsWindow;
         theListener = new Listener();
         this.addMouseListener(theListener);
         repaint(); //appel méthode paintComponent
@@ -22,7 +23,12 @@ public class PaintPanel extends JPanel {
     public void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect(0,0, PaintWindow.WIDTH, PaintWindow.HEIGHT);
-        g.setColor(Color.BLACK);
+        int red = optionsWindow.getRedValue();
+        int green = optionsWindow.getGreenValue();
+        int blue = optionsWindow.getBlueValue();
+
+        toolColor = new Color(red, green, blue);
+        g.setColor(toolColor);
         g.fillOval(x,y,50,50);
     }
 

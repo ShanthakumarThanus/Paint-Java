@@ -8,7 +8,8 @@ public class PaintWindow {
     private static JFrame theWindow;
     public static final int WIDTH = 800;
     public static final int HEIGHT = 700;
-    private static PaintPanel thePanel;
+    private static PaintPanel thePaintPanel;
+    private static OptionsWindow theOptionsWindow;
 
     public static void main(String[] args) {
 
@@ -17,10 +18,11 @@ public class PaintWindow {
         theWindow.setSize(WIDTH,HEIGHT);
 
         theWindow.setLocationRelativeTo(null); //au centre de l'écran, applicable uniquement après avoir defini wifth & height
-        thePanel = new PaintPanel();
+        theOptionsWindow = new OptionsWindow();
+        thePaintPanel = new PaintPanel(theOptionsWindow);
 
         theWindow.setResizable(false);
-        theWindow.add(thePanel);
+        theWindow.add(thePaintPanel);
         theWindow.setVisible(true);
     }
 
