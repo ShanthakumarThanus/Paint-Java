@@ -1,10 +1,14 @@
 package main;
 
+import tool.Tool;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class OptionsWindow {
 
@@ -12,12 +16,18 @@ public class OptionsWindow {
     private JFrame theWindow;
     private JPanel thePanel;
 
-    //slider pour selectioner les couleurs RGB
-    private JSlider redSlider, greenSlider, blueSlider;
+    //slider pour selectioner les couleurs RGB + largeur et hauteur du curseur
+    private JSlider redSlider, greenSlider, blueSlider, widthSlider, heightSlider;
+
+
+    //boutons
+    private JButton circleToolBut, squareToolBut, fillBut;
 
     //listener
     private OptionsListener theOptionsListener;
 
+    // outil sélectionné
+    private int currentTool;
 
     public static final int WIDTH = 220;
 
@@ -35,7 +45,13 @@ public class OptionsWindow {
         redSlider = new JSlider(0,255);
         greenSlider = new JSlider(0,255);
         blueSlider = new JSlider(0,255);
+        widthSlider = new JSlider(0,100);
+        heightSlider = new JSlider(0,100);
         theOptionsListener = new OptionsListener();
+        circleToolBut = new JButton("Cercle");
+        squareToolBut = new JButton("Carré");
+        fillBut = new JButton("Remplir");
+        currentTool = Tool.CIRCLETOOL;
     }
 
     public void setAttributes() {
@@ -59,12 +75,35 @@ public class OptionsWindow {
         blueSlider.setPaintTicks(true);
         blueSlider.setPaintLabels(true);
         blueSlider.addChangeListener(theOptionsListener);
+
+        widthSlider.setBorder(BorderFactory.createTitledBorder("Largeur du pinceau"));
+        widthSlider.setMajorTickSpacing(20);
+        widthSlider.setValue(2);
+        widthSlider.setPaintTicks(true);
+        widthSlider.setPaintLabels(true);
+        widthSlider.addChangeListener(theOptionsListener);
+
+        heightSlider.setBorder(BorderFactory.createTitledBorder("Hauteur du pinceau"));
+        heightSlider.setMajorTickSpacing(20);
+        heightSlider.setValue(2);
+        heightSlider.setPaintTicks(true);
+        heightSlider.setPaintLabels(true);
+        heightSlider.addChangeListener(theOptionsListener);
+
+        circleToolBut.addActionListener(theOptionsListener);
+        squareToolBut.addActionListener(theOptionsListener);
+        fillBut.addActionListener(theOptionsListener);
     }
 
     public void addStuffToPanel() {
         thePanel.add(redSlider);
         thePanel.add(greenSlider);
         thePanel.add(blueSlider);
+        thePanel.add(widthSlider);
+        thePanel.add(heightSlider);
+        thePanel.add(circleToolBut);
+        thePanel.add(squareToolBut);
+        thePanel.add(fillBut);
     }
 
     public void createWindow() {
@@ -82,8 +121,11 @@ public class OptionsWindow {
     public int getRedValue() { return redSlider.getValue(); }
     public int getGreenValue() { return greenSlider.getValue(); }
     public int getBlueValue() { return blueSlider.getValue(); }
+    public int getWidthValue() { return widthSlider.getValue(); }
+    public int getHeightValue() { return heightSlider.getValue(); }
+    public int getCurrentTool() { return currentTool; }
 
-    private class OptionsListener implements ChangeListener {
+    private class OptionsListener implements ChangeListener, ActionListener {
 
         @Override
         public void stateChanged(ChangeEvent e) {
@@ -92,6 +134,21 @@ public class OptionsWindow {
             int blue = blueSlider.getValue();
             Color c = new Color(red, green, blue);
             thePanel.setBackground(c);
+            redSlider.setBackground(c);
+            greenSlider.setBackground(c);
+            blueSlider.setBackground(c);
+            widthSlider.setBackground(c);
+            heightSlider.setBackground(c);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == circleToolBut) {
+                currentTool = Tool.CIRCLETOOL;
+            }
+            if(e.getSource() == squareToolBut) {
+                currentTool = Tool.SQUARETOOL;
+            }
         }
     }
 }

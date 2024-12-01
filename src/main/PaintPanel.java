@@ -1,6 +1,7 @@
 package main;
 
 import tool.CircleTool;
+import tool.SquareTool;
 import tool.Tool;
 
 import javax.swing.JPanel;
@@ -62,13 +63,19 @@ public class PaintPanel extends JPanel {
     public void addStroke(MouseEvent e) {
         toolX = e.getX() / SCALE;
         toolY = e.getY() / SCALE;
-        toolWidth = 20;
-        toolHeight = 20;
+        toolWidth = optionsWindow.getWidthValue();
+        toolHeight = optionsWindow.getHeightValue();
         toolRed = optionsWindow.getRedValue();
         toolGreen = optionsWindow.getGreenValue();
         toolBlue = optionsWindow.getBlueValue();
         toolColor = new Color(toolRed, toolGreen, toolBlue);
-        strokes.add(new CircleTool(toolX, toolY, toolWidth, toolHeight, toolColor));
+
+        if(optionsWindow.getCurrentTool() == Tool.CIRCLETOOL) {
+            strokes.add(new CircleTool(toolX, toolY, toolWidth, toolHeight, toolColor));
+        } else if(optionsWindow.getCurrentTool() == Tool.SQUARETOOL) {
+            strokes.add(new SquareTool(toolX, toolY, toolWidth, toolHeight, toolColor));
+        }
+
         draw();
         repaint();
     }
