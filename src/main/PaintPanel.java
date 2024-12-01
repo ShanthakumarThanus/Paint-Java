@@ -1,8 +1,6 @@
 package main;
 
-import tool.CircleTool;
-import tool.SquareTool;
-import tool.Tool;
+import tool.*;
 
 import javax.swing.JPanel;
 import java.awt.*;
@@ -74,8 +72,11 @@ public class PaintPanel extends JPanel {
             strokes.add(new CircleTool(toolX, toolY, toolWidth, toolHeight, toolColor));
         } else if(optionsWindow.getCurrentTool() == Tool.SQUARETOOL) {
             strokes.add(new SquareTool(toolX, toolY, toolWidth, toolHeight, toolColor));
+        } else if(optionsWindow.getCurrentTool() == Tool.FILL_TOOL) {
+            strokes.add(new FillTool(toolX, toolY, toolWidth, toolHeight, toolColor, image));
+        } else if(optionsWindow.getCurrentTool() == Tool.TRIANGLETOOL) {
+            strokes.add(new TriangleTool(toolX, toolY, toolWidth, toolHeight, toolColor));
         }
-
         draw();
         repaint();
     }
@@ -87,7 +88,7 @@ public class PaintPanel extends JPanel {
         }
 
         public void mousePressed(MouseEvent e) {
-
+            addStroke(e);
         }
 
         public void mouseReleased(MouseEvent e) {

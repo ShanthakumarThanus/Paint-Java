@@ -21,7 +21,7 @@ public class OptionsWindow {
 
 
     //boutons
-    private JButton circleToolBut, squareToolBut, fillBut;
+    private JButton circleToolBut, squareToolBut, fillBut, triangleToolbut;
 
     //listener
     private OptionsListener theOptionsListener;
@@ -51,7 +51,8 @@ public class OptionsWindow {
         circleToolBut = new JButton("Cercle");
         squareToolBut = new JButton("Carré");
         fillBut = new JButton("Remplir");
-        currentTool = Tool.CIRCLETOOL;
+        triangleToolbut = new JButton("Triangle");
+        currentTool = Tool.CIRCLETOOL; //outil selectionné par defaut
     }
 
     public void setAttributes() {
@@ -93,6 +94,7 @@ public class OptionsWindow {
         circleToolBut.addActionListener(theOptionsListener);
         squareToolBut.addActionListener(theOptionsListener);
         fillBut.addActionListener(theOptionsListener);
+        triangleToolbut.addActionListener(theOptionsListener);
     }
 
     public void addStuffToPanel() {
@@ -104,6 +106,7 @@ public class OptionsWindow {
         thePanel.add(circleToolBut);
         thePanel.add(squareToolBut);
         thePanel.add(fillBut);
+        thePanel.add(triangleToolbut);
     }
 
     public void createWindow() {
@@ -143,12 +146,14 @@ public class OptionsWindow {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(e.getSource() == circleToolBut) {
+            if (e.getSource() == circleToolBut) {
                 currentTool = Tool.CIRCLETOOL;
-            }
-            if(e.getSource() == squareToolBut) {
+            } else if (e.getSource() == squareToolBut) {
                 currentTool = Tool.SQUARETOOL;
+            } else if (e.getSource() == triangleToolbut) {
+                currentTool = Tool.TRIANGLETOOL;
             }
         }
+
     }
 }

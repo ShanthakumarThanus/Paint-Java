@@ -12,4 +12,9 @@ public class SquareTool extends Tool {
     public void draw(Graphics2D g) {
         g.fillRect(x,y,width,height);
     }
+
+    @Override
+    public boolean contains(int px, int py) {
+        return false;
+    }
 }

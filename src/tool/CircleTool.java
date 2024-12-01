@@ -12,4 +12,9 @@ public class CircleTool extends Tool {
     public void draw(Graphics2D g) {
         g.fillOval(x,y,width,height);
     }
+
+    @Override
+    public boolean contains(int px, int py) {
+        return false;
+    }
 }
