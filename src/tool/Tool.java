@@ -11,6 +11,7 @@ public abstract class Tool {
     public static final int SQUARETOOL = 2;
     public static final int FILL_TOOL = 3;
     public static final int TRIANGLETOOL = 4;
+    public static final int RECTANGLETOOL = 5;
 
     public Tool(int x, int y, int width, int height, Color color) {
         this.x = x - width / 2; // x soustrait par la largeur divisé par 2 pour centrer le curseur

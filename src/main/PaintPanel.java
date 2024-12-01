@@ -76,6 +76,8 @@ public class PaintPanel extends JPanel {
             strokes.add(new FillTool(toolX, toolY, toolWidth, toolHeight, toolColor, image));
         } else if(optionsWindow.getCurrentTool() == Tool.TRIANGLETOOL) {
             strokes.add(new TriangleTool(toolX, toolY, toolWidth, toolHeight, toolColor));
+        } else if(optionsWindow.getCurrentTool() == Tool.RECTANGLETOOL) {
+            strokes.add(new RectangleTool(toolX, toolY, toolWidth, toolHeight, toolColor));
         }
         draw();
         repaint();
