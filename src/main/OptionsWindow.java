@@ -50,7 +50,7 @@ public class OptionsWindow {
         theOptionsListener = new OptionsListener();
         circleToolBut = new JButton("Cercle");
         squareToolBut = new JButton("Carré");
-        fillBut = new JButton("Remplir");
+        fillBut = new JButton("Pinceau");
         triangleToolbut = new JButton("Triangle");
         currentTool = Tool.CIRCLETOOL; //outil selectionné par defaut
     }
